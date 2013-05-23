@@ -1,0 +1,17 @@
+Project  :=           {id Integer PK, name Varchar(255), Description text}
+Group    :=           {id Integer PK, name Varchar(255), Description text}
+Employee :=           {id Integer PK, name Varchar(255), role_id FK, login Varchar(255), passwd Varchar(255), ??[1]?? ,  email Varchar(255)}
+  
+              
+///////////////
+Возможно, что нужно будет хранить также фамилию и отчество?
+Пароль SHA-1? Нужно ли будет хранить ключ soil[1] для каждого? 
+///////////////
+
+
+Roles    :=           {id Integer PK, name Varchar(255)}
+Reports  :=           {emp_id FK, act_id FK} 
+Activity :=           {id Integer PK, type_id FK, bug_id Integer, act_name Varchar(255), description text, time_used Date}
+Types    :=           {id Integer PK, name Varchar(255) }   - фиксированный список ( типы активности BugFix и т.п.)
+
+PK - primary key, FK - foreign key
