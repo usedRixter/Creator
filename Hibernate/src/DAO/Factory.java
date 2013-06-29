@@ -1,5 +1,7 @@
 package DAO;
 
+import util.HibernateUtil;
+
 
 
 public class Factory {
@@ -16,7 +18,7 @@ public class Factory {
 
       public Dao getDao(){
             if (projDao == null){
-              projDao = new Dao();
+              projDao = new Dao(HibernateUtil.getSessionFactory().openSession());
             }
             return projDao;
       }  

@@ -20,85 +20,55 @@ import logic.Student;*/
 
 public class Dao<T> implements CRUD<T> {
     
+    private Session session;
+    
+    Dao(Session session){
+        this.session=session;
+    }
+    
    @Override
    public void add(T t ) throws SQLException {
-        Session session = null;
             try {
-                session = HibernateUtil.getSessionFactory().openSession();
-                session.beginTransaction();
                 session.save(t);
-                session.getTransaction().commit();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage(), "Ошибка I/O", JOptionPane.OK_OPTION);
-            } finally {
-                if (session != null && session.isOpen()) {
-                    session.close();
-                }
+                JOptionPane.showMessageDialog(null, e.getMessage(), "add() Failed", JOptionPane.OK_OPTION);
             }
     }
     
    @Override
     public void update(T t) throws SQLException {
-        Session session = null;
             try {
-                session = HibernateUtil.getSessionFactory().openSession();
-                session.beginTransaction();
                 session.update(t);
-                session.getTransaction().commit();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage(), "Ошибка I/O", JOptionPane.OK_OPTION);
-            } finally {
-                if (session != null && session.isOpen()) {
-                    session.close();
-                }
+                JOptionPane.showMessageDialog(null, e.getMessage(), "update() Failed", JOptionPane.OK_OPTION);
             }
     }
     @Override
     public T getById(Long id) throws SQLException {
-         Session session = null;
            T t = null;
             try {
-                session = HibernateUtil.getSessionFactory().openSession();
                 t = (T) session.load(Object.class, id);
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage(), "Ошибка I/O", JOptionPane.OK_OPTION);
-            } finally {
-                if (session != null && session.isOpen()) {
-                    session.close();
-                }
+                JOptionPane.showMessageDialog(null, e.getMessage(), "getById() Failed", JOptionPane.OK_OPTION);
             }
             return t;
     }
     @Override
-    public List<Project> getAll() throws SQLException {
-        Session session = null;
-            List<Project> projs = new ArrayList<Project>();
+    public List<T> getAll() throws SQLException {
+            List<T> ts = new ArrayList<T>();
             try {
-                session = HibernateUtil.getSessionFactory().openSession();
-                projs = session.createCriteria(Project.class).list();
+                ts = session.createCriteria(Object.class).list();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage(), "Ошибка I/O", JOptionPane.OK_OPTION);
-            } finally {
-                if (session != null && session.isOpen()) {
-                    session.close();
-                }
+                JOptionPane.showMessageDialog(null, e.getMessage(), "getAll() Failed", JOptionPane.OK_OPTION);
             }
-            return projs;
+            return ts;
     }
     @Override
     public void delete(T t) throws SQLException {
-        Session session = null;
             try {
-                session = HibernateUtil.getSessionFactory().openSession();
-                session.beginTransaction();
                 session.delete(t);
-                session.getTransaction().commit();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage(), "Ошибка I/O", JOptionPane.OK_OPTION);
-            } finally {
-                if (session != null && session.isOpen()) {
-                    session.close();
-                }
+                JOptionPane.showMessageDialog(null, e.getMessage(), "delete() Failed", JOptionPane.OK_OPTION);
             }
     }
 
