@@ -8,15 +8,12 @@ package DAO;
  *
  * @author rixter
  */
-import hibernate.Project;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.Session;
-import util.HibernateUtil;
-/*import DAO.StudentDAO;
-import logic.Student;*/
+
 
 public class Dao<T> implements CRUD<T> {
     
@@ -24,6 +21,9 @@ public class Dao<T> implements CRUD<T> {
     
     Dao(Session session){
         this.session=session;
+    }
+    public Session getSeesion(){
+        return session;
     }
     
    @Override
