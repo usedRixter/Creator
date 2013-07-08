@@ -9,12 +9,12 @@ import java.util.List;
  *
  * @author rixter 
  * */
-public interface CRUD<T> {
+public interface CRUD {
     
-    public void add(T t) throws SQLException;
-    public void update(T t) throws SQLException;
-    public T getById(Long id) throws SQLException;
-    public List<T> getAll() throws SQLException;
-    public void delete(T t) throws SQLException;
+    public void add(Object t) throws SQLException;
+    public void update(Object t) throws SQLException;
+    public Object getById(Long id) throws SQLException;
+    public List getAll() throws SQLException;
+    public void delete(Object t) throws SQLException;
     
 }

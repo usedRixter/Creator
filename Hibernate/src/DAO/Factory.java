@@ -1,12 +1,12 @@
 package DAO;
 
-import util.HibernateUtil;
+import util.JPAUtil;
 
 
 
 public class Factory {
      
-      private static Dao projDao = null;
+      private static DaoActivity projDao = null;
       private static Factory instance = null;
 
       public static synchronized Factory getInstance(){
@@ -16,9 +16,9 @@ public class Factory {
             return instance;
       }
 
-      public Dao getDao(){
+      public DaoActivity getDaoActivity(){
             if (projDao == null){
-              projDao = new Dao(HibernateUtil.getSessionFactory().openSession());
+              projDao = new DaoActivity(JPAUtil.getEntityManager());
             }
             return projDao;
       }  
